@@ -41,7 +41,7 @@
 
     <div class="container formulario">
         <form action="">
-            <p class="h3">Formulario de Registro</p>
+            <p class="h3" onclick="mensaje();">Formulario de Registro</p>
             <br>
             <div class="row">
                 <div class="col">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col">
                     <label for="inputRut" class="form-label">RUT:</label>
-                    <input type="text" name="rut" id="inputRut" class="form-control">
+                    <input type="text" name="rut" id="inputRut" class="form-control" onfocus="hacerFocus();" onblur="perderFoco();">
                 </div>
             </div>
             <br>
@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col-8"></div>
                 <div class="col-4 d-flex justify-content-end">
-                    <button type="reset" class="btn btn-secondary">Cancelar</button>
+                    <button type="reset" class="btn btn-secondary me-2">Cancelar</button>
                     <button type="button" class="btn btn-primary" onclick="validarFormulario();">Enviar</button>
                 </div>
             </div>

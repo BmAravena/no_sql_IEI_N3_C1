@@ -7,3 +7,9 @@
     border-radius: 10px;
     padding: 20px;
 }
+
+.alerta{
+    border: solid 2px red;
+    background-color: rgb(255, 205, 205);
+    color: red;
+}

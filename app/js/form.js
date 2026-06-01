@@ -61,7 +61,7 @@ function validarFormulario(){
     }
 
     if(formularioValido){
-        alert('Datos ingresados correctamente, envoando formulario...');
+        alert('Datos ingresados correctamente, enviando formulario...');
     }else{
         alert('Debe completar los campos resaltados para enviar el formulario');
     }

@@ -40,17 +40,18 @@
     </nav>
 
     <div class="container formulario">
-        <form action="">
+        <form action="" id="formularioRegistro">
             <p class="h3">Formulario de Registro</p>
             <br>
             <div class="row">
                 <div class="col">
                     <label for="inputNombre" class="form-label">Nombre Completo:</label>
-                    <input type="text" name="nombre" id="inputNombre" class="form-control" onchange="validarInput(this);">
+                    <input type="text" name="nombre" id="inputNombre" class="form-control"
+                        onchange="validarInput(this);">
                 </div>
                 <div class="col">
                     <label for="inputRut" class="form-label">RUT:</label>
-                    <input type="text" name="rut" id="inputRut" class="form-control" onchange="validarInput(this);">
+                    <input type="text" name="rut" id="inputRut" class="form-control" onchange="validarRut(this);">
                 </div>
             </div>
             <br>
@@ -58,7 +59,8 @@
             <div class="row">
                 <div class="col">
                     <label for="inputEmail" class="form-label">Email:</label>
-                    <input type="email" name="email" id="inputEmail" class="form-control" onchange="validarInput(this);">
+                    <input type="email" name="email" id="inputEmail" class="form-control"
+                        onchange="validarInput(this);">
                 </div>
                 <div class="col">
                     <label for="dateFechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
@@ -70,11 +72,13 @@
             <div class="row">
                 <div class="col">
                     <label for="password" class="form-label">Contraseña:</label>
-                    <input type="password" name="contrasena" id="password" class="form-control" onchange="validarInput(this);">
+                    <input type="password" name="contrasena" id="password" class="form-control"
+                        onchange="validarInput(this);">
                 </div>
                 <div class="col">
                     <label for="passwordRepetir" class="form-label">Repetir Contraseña:</label>
-                    <input type="password" name="contrasena" id="passwordRepetir" class="form-control" onchange="validarInput(this);">
+                    <input type="password" name="contrasena" id="passwordRepetir" class="form-control"
+                        onchange="validarInput(this);">
                 </div>
             </div>
             <br>

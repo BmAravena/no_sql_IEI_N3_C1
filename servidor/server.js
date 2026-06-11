@@ -43,6 +43,17 @@ app.post('/guardarUsuario', async (req, res) => {
         await nuevoUsuario.save();
         res.status(200).json({ message: 'Datos Guardados correctamente.' });
     } catch (err) {
-        res.status(500).json({ message: 'Error al guardar los datos' });
+        res.status(500).json({ message: 'Error al guardar los datos: ', err });
+    }
+});
+
+// Crear el ENDPOINT para leer los datos de usuario
+app.get('/obtenerUsuarios', async (req, res) => {
+    try {
+        // Obtenemos una lista de usuarios desde DB
+        const usuarios = await Usuario.find();
+        res.status(200).json(usuarios);
+    } catch (err) {
+        res.status(500).json({ message: 'Error al obtener los datos: ', err });
     }
 });

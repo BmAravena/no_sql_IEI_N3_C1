@@ -6,12 +6,22 @@ function validarFormulario() {
     let inputRepetirContrasena = document.getElementById('passwordRepetir');
     let formularioValido = true;
 
-    if (!validarInput(inputNombre)
-        || !validarRut(inputRut)
-        || !validarEmail(inputEmail)
-        || !validarContrasena(inputContrasena)
-        || !validarInput(inputRepetirContrasena)
-        || inputRepetirContrasena.value !== inputContrasena.value) {
+    if (!validarInput(inputNombre)) {
+        formularioValido = false;
+    }
+    if (!validarRut(inputRut)) {
+        formularioValido = false;
+    }
+    if (!validarEmail(inputEmail)) {
+        formularioValido = false;
+    }
+    if (!validarContrasena(inputContrasena)) {
+        formularioValido = false;
+    }
+    if (!validarInput(inputRepetirContrasena)) {
+        formularioValido = false;
+    }
+    if (inputRepetirContrasena.value !== inputContrasena.value) {
         formularioValido = false;
     }
 
@@ -67,19 +77,22 @@ function validarContrasena(inputContrasena) {
 function validarRut(inputRut) {
     if (validarInput(inputRut)) {
         rutCompleto = inputRut.value
-        if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto)) {
+        rutCompleto = rutCompleto.replaceAll('.', '');
+        if (/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto)) {
+            const tmp = rutCompleto.split('-');
+            const digv = tmp[1];
+            const rut = tmp[0];
+            if (digv == 'K') digv = 'k';
+            return digitoVerificador(rut) != digv ? inputInvalido(inputRut) : inputValido(inputRut);
+
+        } else {
             return inputInvalido(inputRut);
         }
-        const tmp = rutCompleto.split('-');
-        const digv = tmp[1];
-        const rut = tmp[0];
-        if (digv == 'K') digv = 'k';
-        return digitoVerificador(rut) != digv ? inputInvalido(inputRut) : inputValido(inputRut);
     }
 }
 
 function digitoVerificador(T) {
-    const M = 0, S = 1;
+    let M = 0, S = 1;
     for (; T; T = Math.floor(T / 10))
         S = (S + T % 10 * (9 - M++ % 6)) % 11;
     return S ? S - 1 : 'k';

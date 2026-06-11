@@ -7,11 +7,8 @@ function validarFormulario() {
     let formularioValido = true;
 
     if (!validarInput(inputNombre)
-        || !validarInput(inputRut)
         || !validarRut(inputRut)
-        || !validarInput(inputEmail)
         || !validarEmail(inputEmail)
-        || !validarInput(inputContrasena)
         || !validarContrasena(inputContrasena)
         || !validarInput(inputRepetirContrasena)
         || inputRepetirContrasena.value !== inputContrasena.value) {
@@ -25,7 +22,7 @@ function validarFormulario() {
 
         const enviarFormulario = async () => {
             try {
-                const response = await fetch('http://localhost:5000/guardarUsuario', {
+                const response = await fetch('http://localhost:3000/guardarUsuario', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -54,25 +51,31 @@ function validarInput(input) {
 }
 
 function validarEmail(inputEmail) {
-    const expresionEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return expresionEmail.test(inputEmail.value) ? inputValido(inputEmail) : inputInvalido(inputEmail);
+    if (validarInput(inputEmail)) {
+        const expresionEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return expresionEmail.test(inputEmail.value) ? inputValido(inputEmail) : inputInvalido(inputEmail);
+    }
 }
 
 function validarContrasena(inputContrasena) {
-    const expresionContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
-    return expresionContrasena.test(inputContrasena.value) ? inputValido(inputContrasena) : inputInvalido(inputContrasena);
+    if (validarInput(inputContrasena)) {
+        const expresionContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
+        return expresionContrasena.test(inputContrasena.value) ? inputValido(inputContrasena) : inputInvalido(inputContrasena);
+    }
 }
 
 function validarRut(inputRut) {
-    rutCompleto = inputRut.value
-    if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto)) {
-        return inputInvalido(inputRut);
+    if (validarInput(inputRut)) {
+        rutCompleto = inputRut.value
+        if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto)) {
+            return inputInvalido(inputRut);
+        }
+        const tmp = rutCompleto.split('-');
+        const digv = tmp[1];
+        const rut = tmp[0];
+        if (digv == 'K') digv = 'k';
+        return digitoVerificador(rut) != digv ? inputInvalido(inputRut) : inputValido(inputRut);
     }
-    const tmp = rutCompleto.split('-');
-    const digv = tmp[1];
-    const rut = tmp[0];
-    if (digv == 'K') digv = 'k';
-    return digitoVerificador(rut) != digv ? inputInvalido(inputRut) : inputValido(inputRut);
 }
 
 function digitoVerificador(T) {

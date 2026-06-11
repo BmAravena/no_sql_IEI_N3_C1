@@ -1,16 +1,13 @@
 const express = require('express'); // Librería que permite generar servidores JS
 const cors = require('cors'); // Permite la ejecución de scripts entre máquinas distintas (cliente - servidor)
-const bodyParser = require('body-parser'); // Toma la información de un FORM y lo "parsea" en un objeto JSON
 const mongoose = require('mongoose'); // ORM para trabajar con express (Object Relatonal Mapping)
 
 const app = express();
-const PORT = process.env.PORT || 5000;;
+const PORT = 3000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extend: true }));
-// app.use(bodyParser.json());
 
 // Chequeamos el puerto en el que efectivamente está corriendo la app
 app.listen(PORT, () => {

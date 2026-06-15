@@ -42,6 +42,8 @@ function validarFormulario() {
 
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
+                }else{
+                    window.location.href='./index.html';
                 }
 
                 const data = await response.json();

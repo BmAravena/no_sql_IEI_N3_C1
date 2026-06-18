@@ -1,3 +1,7 @@
+window.onload = function () {
+    cargarPaises();
+};
+
 function validarFormulario() {
     let inputNombre = document.getElementById('inputNombre');
     let inputRut = document.getElementById('inputRut');
@@ -42,8 +46,8 @@ function validarFormulario() {
 
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
-                }else{
-                    window.location.href='./index.html';
+                } else {
+                    window.location.href = './index.html';
                 }
 
                 const data = await response.json();
@@ -111,4 +115,21 @@ function inputValido(input) {
     input.classList.remove('is-invalid');
     input.classList.add('is-valid');
     return true
+};
+
+async function cargarPaises() {
+    try {
+        const response = await fetch('http://localhost:3000/obtenerPaises');
+        const paises = await response.json();
+
+        const select = document.getElementById('selectNacionalidad');
+        paises.forEach(pais => {
+            const opcion = document.createElement('option');
+            opcion.value = pais.iso_2;
+            opcion.textContent = pais.nacionalidad;
+            select.appendChild(opcion);
+        })
+    } catch (error) {
+        console.log('Ha ocurrido un error al cargar los datos: ', error);
+    }
 };

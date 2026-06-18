@@ -15,7 +15,7 @@ app.listen(PORT, () => {
 });
 
 // Crear la conexion con MongoDB
-mongoose.connect('mongodb://localhost:27017/test')
+mongoose.connect('mongodb://localhost:27017/IEI_N3_C1')
     .then(() => console.log('Conexión Exitosa!'))
     .catch((err) => console.error('Error al conectar a la DB: ', err));
 

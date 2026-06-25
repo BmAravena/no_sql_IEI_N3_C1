@@ -16,7 +16,23 @@ function obtenerUsuarios() {
                     { data: 'rut' },
                     { data: 'email' },
                     { data: 'nacionalidad' },
-                    { data: 'fechaNacimiento' }
+                    {
+                        data: 'fechaNacimiento',
+                        render: function (data, type, row) {
+                            if (type === 'sort' || type === 'type') {
+                                return data;
+                            }
+
+                            if (!data) return '';
+
+                            let date = new Date(data);
+                            return date.toLocaleDateString('es-CL', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit'
+                            });
+                        }
+                    }
                 ]
             });
         } catch (err) {

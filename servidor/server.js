@@ -31,9 +31,13 @@ const usuario = new mongoose.Schema({
     nombre: String,
     rut: String,
     email: String,
-    fechaNacimiento: String,
+    fechaNacimiento: Date,
     contrasena: String,
-    nacionalidad:String
+    nacionalidad: String,
+    fechaCreacion: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const pais = new mongoose.Schema({
@@ -51,10 +55,10 @@ const Pais = mongoose.model('Pais', pais, 'paises');
 app.post('/guardarUsuario', async (req, res) => {
     try {
         // Leemos la data desde el BODY (cuerpo) de la REQUEST (solicitud)
-        const { nombre, rut, email, fechaNacimiento, contrasena,nacionalidad } = req.body;
+        const { nombre, rut, email, fechaNacimiento, contrasena, nacionalidad } = req.body;
         const contrasenaEncriptada = bcrypt.hashSync(contrasena, 10);
         // Instanciamos el OBJETO Usuario con los valores obtenidos desde la REQUEST
-        const nuevoUsuario = new Usuario({ nombre, rut, email, fechaNacimiento, contrasena: contrasenaEncriptada,nacionalidad });
+        const nuevoUsuario = new Usuario({ nombre, rut, email, fechaNacimiento, contrasena: contrasenaEncriptada, nacionalidad });
 
         // Le indicamos al ORM que debe PERSISTIR ese OBJETO
         await nuevoUsuario.save();

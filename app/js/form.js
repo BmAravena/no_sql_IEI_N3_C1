@@ -122,11 +122,13 @@ async function cargarPaises() {
         const response = await fetch('http://localhost:3000/obtenerPaises');
         const paises = await response.json();
 
+        console.log(paises);
+
         const select = document.getElementById('selectNacionalidad');
         paises.forEach(pais => {
             const opcion = document.createElement('option');
-            opcion.value = pais.iso_2;
-            opcion.textContent = pais.nacionalidad;
+            opcion.value = pais.iso2;
+            opcion.textContent = pais.nameES;
             select.appendChild(opcion);
         })
     } catch (error) {

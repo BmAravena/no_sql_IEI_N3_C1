@@ -3,6 +3,7 @@ const express = require('express'); // Librería que permite generar servidores 
 const cors = require('cors'); // Permite la ejecución de scripts entre máquinas distintas (cliente - servidor)
 const mongoose = require('mongoose'); // ORM para trabajar con express (Object Relatonal Mapping)
 const bcrypt = require('bcryptjs'); // Librería para encriptar contraseñas
+const dns = require("node:dns/promises");
 
 const app = express();
 const PORT = 3000;
@@ -10,6 +11,8 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+dns.setServers(["1.1.1.1"]);
 
 const uri = process.env.URI
 
@@ -29,7 +32,8 @@ const usuario = new mongoose.Schema({
     rut: String,
     email: String,
     fechaNacimiento: String,
-    contrasena: String
+    contrasena: String,
+    nacionalidad:String
 });
 
 const pais = new mongoose.Schema({
@@ -47,10 +51,10 @@ const Pais = mongoose.model('Pais', pais, 'paises');
 app.post('/guardarUsuario', async (req, res) => {
     try {
         // Leemos la data desde el BODY (cuerpo) de la REQUEST (solicitud)
-        const { nombre, rut, email, fechaNacimiento, contrasena } = req.body;
+        const { nombre, rut, email, fechaNacimiento, contrasena,nacionalidad } = req.body;
         const contrasenaEncriptada = bcrypt.hashSync(contrasena, 10);
         // Instanciamos el OBJETO Usuario con los valores obtenidos desde la REQUEST
-        const nuevoUsuario = new Usuario({ nombre, rut, email, fechaNacimiento, contrasena: contrasenaEncriptada });
+        const nuevoUsuario = new Usuario({ nombre, rut, email, fechaNacimiento, contrasena: contrasenaEncriptada,nacionalidad });
 
         // Le indicamos al ORM que debe PERSISTIR ese OBJETO
         await nuevoUsuario.save();

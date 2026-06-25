@@ -15,6 +15,7 @@ function obtenerUsuarios() {
                     { data: 'nombre' },
                     { data: 'rut' },
                     { data: 'email' },
+                    { data: 'nacionalidad' },
                     { data: 'fechaNacimiento' }
                 ]
             });

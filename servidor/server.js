@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express'); // Librería que permite generar servidores JS
 const cors = require('cors'); // Permite la ejecución de scripts entre máquinas distintas (cliente - servidor)
 const mongoose = require('mongoose'); // ORM para trabajar con express (Object Relatonal Mapping)
@@ -10,15 +11,17 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+const uri = process.env.URI
+
+// Crear la conexion con MongoDB
+mongoose.connect(uri)
+    .then(() => console.log('Conexión Exitosa!'))
+    .catch((err) => console.error('Error al conectar a la DB: ', err));
+
 // Chequeamos el puerto en el que efectivamente está corriendo la app
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
-
-// Crear la conexion con MongoDB
-mongoose.connect('mongodb://localhost:27017/IEI_N3_C1')
-    .then(() => console.log('Conexión Exitosa!'))
-    .catch((err) => console.error('Error al conectar a la DB: ', err));
 
 // Creamos la ENTIDAD/MODELO en mongoose (ORM)
 const usuario = new mongoose.Schema({

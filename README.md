@@ -6,10 +6,12 @@ Bases de datos NO estructuradas, proyecto unidad 3
    Una vez instalado, ejecutar por terminal:
    ```
    npm init -y
-   npm install express mongoose cors body-parser
+   npm install express mongoose cors bcryptjs mongodb dotenv
    ```
 
    Si no permite ejecución de Scripts, ejecutar por terminal:
    ```
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
    ```
+   
+   Install MongoDB Node.js Driver: npm install mongodb

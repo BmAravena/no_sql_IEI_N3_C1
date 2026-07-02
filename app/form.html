@@ -45,6 +45,7 @@
         <form action="" id="formularioRegistro">
             <p class="h3">Formulario de Registro</p>
             <br>
+
             <p class="h5">Datos Personales</p>
             <hr>
             <div class="row">
@@ -64,7 +65,7 @@
                 <div class="col">
                     <label for="inputEmail" class="form-label">Email:</label>
                     <input type="email" name="email" id="inputEmail" class="form-control"
-                        onchange="validarInput(this);">
+                        onchange="validarEmail(this);">
                 </div>
                 <div class="col">
                     <label for="dateFechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
@@ -77,12 +78,12 @@
                 <div class="col">
                     <label for="password" class="form-label">Contraseña:</label>
                     <input type="password" name="contrasena" id="password" class="form-control"
-                        onchange="validarInput(this);">
+                        onchange="validarContrasena(this);">
                 </div>
                 <div class="col">
                     <label for="passwordRepetir" class="form-label">Repetir Contraseña:</label>
                     <input type="password" name="contrasena" id="passwordRepetir" class="form-control"
-                        onchange="validarInput(this);">
+                        onchange="validarRepetirContrasena(this);">
                 </div>
                 <div class="col">
                     <label for="selectNacionalidad" class="form-label">Nacionalidad:</label>
@@ -91,6 +92,7 @@
                     </select>
                 </div>
             </div>
+            <br>
             <br>
             
             <p class="h5">Dirección</p>

@@ -27,7 +27,7 @@ function validarFormulario() {
     if (!validarInput(inputRepetirContrasena)) {
         formularioValido = false;
     }
-    if (inputRepetirContrasena.value !== inputContrasena.value) {
+    if (!validarRepetirContrasena(inputRepetirContrasena)) {
         formularioValido = false;
     }
     if (!validarInput(inputComuna)) {
@@ -47,7 +47,7 @@ function validarFormulario() {
             numero: dataForm.get('numero'),
             departamento: dataForm.get('departamento')
         };
-        dataForm.set('direccion',JSON.stringify(direccion));
+        dataForm.set('direccion', JSON.stringify(direccion));
 
         const datos = Object.fromEntries(dataForm.entries());
 
@@ -83,17 +83,24 @@ function validarInput(input) {
     return input.value !== '' ? inputValido(input) : inputInvalido(input);
 }
 
-function validarEmail(inputEmail) {
-    if (validarInput(inputEmail)) {
+function validarEmail(input) {
+    if (validarInput(input)) {
         const expresionEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        return expresionEmail.test(inputEmail.value) ? inputValido(inputEmail) : inputInvalido(inputEmail);
+        return expresionEmail.test(input.value) ? inputValido(input) : inputInvalido(input);
     }
 }
 
-function validarContrasena(inputContrasena) {
-    if (validarInput(inputContrasena)) {
+function validarContrasena(input) {
+    if (validarInput(input)) {
         const expresionContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
-        return expresionContrasena.test(inputContrasena.value) ? inputValido(inputContrasena) : inputInvalido(inputContrasena);
+        return expresionContrasena.test(input.value) ? inputValido(input) : inputInvalido(input);
+    }
+}
+
+function validarRepetirContrasena(input) {
+    if (validarInput(input)) {
+        let inputContrasena = document.getElementById('password');
+        return input.value === inputContrasena.value ? inputValido(input):inputInvalido(input);
     }
 }
 
@@ -138,8 +145,6 @@ async function cargarPaises() {
     try {
         const response = await fetch('http://localhost:3000/obtenerPaises');
         const paises = await response.json();
-
-        console.log(paises);
 
         const select = document.getElementById('selectNacionalidad');
         paises.forEach(pais => {

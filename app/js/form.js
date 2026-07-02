@@ -8,6 +8,8 @@ function validarFormulario() {
     let inputEmail = document.getElementById('inputEmail');
     let inputContrasena = document.getElementById('password');
     let inputRepetirContrasena = document.getElementById('passwordRepetir');
+    let inputComuna = document.getElementById('inputComuna');
+    let inputCalle = document.getElementById('inputCalle');
     let formularioValido = true;
 
     if (!validarInput(inputNombre)) {
@@ -28,10 +30,25 @@ function validarFormulario() {
     if (inputRepetirContrasena.value !== inputContrasena.value) {
         formularioValido = false;
     }
+    if (!validarInput(inputComuna)) {
+        formularioValido = false;
+    }
+    if (!validarInput(inputCalle)) {
+        formularioValido = false;
+    }
 
     if (formularioValido) {
         const formulario = document.getElementById('formularioRegistro');
         const dataForm = new FormData(formulario);
+
+        const direccion = {
+            comuna: dataForm.get('comuna'),
+            calle: dataForm.get('calle'),
+            numero: dataForm.get('numero'),
+            departamento: dataForm.get('departamento')
+        };
+        dataForm.set('direccion',JSON.stringify(direccion));
+
         const datos = Object.fromEntries(dataForm.entries());
 
         const enviarFormulario = async () => {

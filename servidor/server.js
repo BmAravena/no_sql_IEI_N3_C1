@@ -26,6 +26,13 @@ app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
+const direccion = new mongoose.Schema({
+    comuna: String,
+    calle: String,
+    numero: String,
+    departamento: String
+});
+
 // Creamos la ENTIDAD/MODELO en mongoose (ORM)
 const usuario = new mongoose.Schema({
     nombre: String,
@@ -37,7 +44,8 @@ const usuario = new mongoose.Schema({
     fechaCreacion: {
         type: Date,
         default: Date.now
-    }
+    },
+    direccion: [direccion]
 });
 
 const pais = new mongoose.Schema({
@@ -55,10 +63,13 @@ const Pais = mongoose.model('Pais', pais, 'paises');
 app.post('/guardarUsuario', async (req, res) => {
     try {
         // Leemos la data desde el BODY (cuerpo) de la REQUEST (solicitud)
-        const { nombre, rut, email, fechaNacimiento, contrasena, nacionalidad } = req.body;
-        const contrasenaEncriptada = bcrypt.hashSync(contrasena, 10);
+        const { nombre, rut, email, fechaNacimiento, contrasena, nacionalidad, direccion } = req.body;
+        const direccionUsuario = JSON.parse(direccion);
+
+        const salt = bcrypt.genSaltSync(10);
+        const contrasenaEncriptada = bcrypt.hashSync(contrasena, salt);
         // Instanciamos el OBJETO Usuario con los valores obtenidos desde la REQUEST
-        const nuevoUsuario = new Usuario({ nombre, rut, email, fechaNacimiento, contrasena: contrasenaEncriptada, nacionalidad });
+        const nuevoUsuario = new Usuario({ nombre, rut, email, fechaNacimiento, contrasena: contrasenaEncriptada, nacionalidad, direccion: direccionUsuario });
 
         // Le indicamos al ORM que debe PERSISTIR ese OBJETO
         await nuevoUsuario.save();
@@ -72,7 +83,15 @@ app.post('/guardarUsuario', async (req, res) => {
 app.get('/obtenerUsuarios', async (req, res) => {
     try {
         // Obtenemos una lista de usuarios desde DB
-        const usuarios = await Usuario.find();
+        const usuarios = await Usuario.aggregate([{ // Colección principal desde la que queremos obtener datos
+            $lookup: {
+                from: 'paises', // Colección que contiene los datos que queremos agregar
+                localField: 'nacionalidad', // Campo de la colección principal que tiene la data relacionada
+                foreignField: 'iso2', // Campo en la colección agregada que tiene el dato real
+                as: 'paisOrigen' // Alias o nombre que le daremos a la agregación
+            }
+        }]);
+
         res.status(200).json(usuarios);
     } catch (err) {
         res.status(500).json({ message: 'Error al obtener los datos: ', err });

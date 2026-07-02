@@ -9,13 +9,15 @@ function obtenerUsuarios() {
             const response = await fetch('http://localhost:3000/obtenerUsuarios');
             const usuarios = await response.json();
 
+            console.log(usuarios);
+
             new DataTable('#usuarios', {
                 data: usuarios,
                 columns: [
                     { data: 'nombre' },
                     { data: 'rut' },
                     { data: 'email' },
-                    { data: 'nacionalidad' },
+                    { data: 'paisOrigen[0].nameES' },
                     {
                         data: 'fechaNacimiento',
                         render: function (data, type, row) {

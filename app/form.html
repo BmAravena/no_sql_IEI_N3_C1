@@ -45,6 +45,8 @@
         <form action="" id="formularioRegistro">
             <p class="h3">Formulario de Registro</p>
             <br>
+            <p class="h5">Datos Personales</p>
+            <hr>
             <div class="row">
                 <div class="col">
                     <label for="inputNombre" class="form-label">Nombre Completo:</label>
@@ -87,6 +89,37 @@
                     <select name="nacionalidad" id="selectNacionalidad" class="form-select">
                         <option value="" selected>Seleccione su nacionalidad</option>
                     </select>
+                </div>
+            </div>
+            <br>
+            
+            <p class="h5">Dirección</p>
+            <hr>
+
+            <div class="row">
+                <div class="col">
+                    <label for="inputComuna" class="form-label">Comuna:</label>
+                    <input type="text" name="comuna" id="inputComuna" class="form-control"
+                        onchange="validarInput(this);">
+                </div>
+
+                <div class="col">
+                    <label for="inputCalle" class="form-label">Calle:</label>
+                    <input type="text" name="calle" id="inputCalle" class="form-control"
+                        onchange="validarInput(this);">
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col">
+                    <label for="inputNumero" class="form-label">Número:</label>
+                    <input type="text" name="numero" id="inputNumero" class="form-control">
+                </div>
+
+                <div class="col">
+                    <label for="inputDepartamento" class="form-label">Departamento/Oficina:</label>
+                    <input type="text" name="departamento" id="inputDepartamento" class="form-control">
                 </div>
             </div>
             <br>

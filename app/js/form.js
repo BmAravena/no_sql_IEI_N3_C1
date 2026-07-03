@@ -5,7 +5,11 @@ window.onload = function () {
 function validarFormulario() {
     let inputNombre = document.getElementById('inputNombre');
     let inputRut = document.getElementById('inputRut');
-    let inputEmail = document.getElementById('inputEmail');
+    let inputCorreo = document.getElementById('inputCorreo');
+    let inputTelefono = document.getElementById('inputTelefono');
+    let inputGenero = document.getElementById('selectGenero');
+    let inputFechaNacimiento = document.getElementById('dateFechaNacimiento');
+    let inputNacionalidad = document.getElementById('selectNacionalidad');
     let inputContrasena = document.getElementById('password');
     let inputRepetirContrasena = document.getElementById('passwordRepetir');
     let inputComuna = document.getElementById('inputComuna');
@@ -18,7 +22,16 @@ function validarFormulario() {
     if (!validarRut(inputRut)) {
         formularioValido = false;
     }
-    if (!validarEmail(inputEmail)) {
+    if (!validarEmail(inputCorreo)) {
+        formularioValido = false;
+    }
+    if (!validarGenero(inputGenero)) {
+        formularioValido = false;
+    }
+    if (!validarInput(inputFechaNacimiento)) {
+        formularioValido = false;
+    }
+    if (!validarInput(inputNacionalidad)) {
         formularioValido = false;
     }
     if (!validarContrasena(inputContrasena)) {
@@ -61,14 +74,15 @@ function validarFormulario() {
                     body: JSON.stringify(datos)
                 });
 
+                const data = await response.json();
                 if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                } else {
-                    window.location.href = './index.html';
+                    console.error('Error guardando usuario:', data);
+                    alert('Error al guardar usuario: ' + (data.message || response.status));
+                    return;
                 }
 
-                const data = await response.json();
                 console.log("Datos recibidos:", data);
+                window.location.href = './index.html';
             } catch (error) {
                 console.error("Error:", error);
             }
@@ -118,6 +132,12 @@ function validarRut(inputRut) {
         } else {
             return inputInvalido(inputRut);
         }
+    }
+}
+
+function validarGenero(input) {
+    if (validarInput(input)) {
+        return ['M', 'F', 'O'].includes(input.value) ? inputValido(input) : inputInvalido(input);
     }
 }
 

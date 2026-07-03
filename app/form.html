@@ -36,6 +36,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./form.html">Formulario Registro</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./cancion.html">Formulario Canción</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -63,9 +66,22 @@
 
             <div class="row">
                 <div class="col">
-                    <label for="inputEmail" class="form-label">Email:</label>
-                    <input type="email" name="email" id="inputEmail" class="form-control"
+                    <label for="inputCorreo" class="form-label">Correo:</label>
+                    <input type="email" name="correo" id="inputCorreo" class="form-control"
                         onchange="validarEmail(this);">
+                </div>
+                <div class="col">
+                    <label for="inputTelefono" class="form-label">Teléfono:</label>
+                    <input type="text" name="telefono" id="inputTelefono" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="selectGenero" class="form-label">Género</label>
+                    <select name="generoString" id="selectGenero" class="form-select" onchange="validarGenero(this);">
+                        <option value="" selected>Seleccione</option>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                        <option value="O">O</option>
+                    </select>
                 </div>
                 <div class="col">
                     <label for="dateFechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
@@ -82,7 +98,7 @@
                 </div>
                 <div class="col">
                     <label for="passwordRepetir" class="form-label">Repetir Contraseña:</label>
-                    <input type="password" name="contrasena" id="passwordRepetir" class="form-control"
+                    <input type="password" name="contrasenaRepetir" id="passwordRepetir" class="form-control"
                         onchange="validarRepetirContrasena(this);">
                 </div>
                 <div class="col">

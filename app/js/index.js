@@ -16,7 +16,7 @@ function obtenerUsuarios() {
                 columns: [
                     { data: 'nombre' },
                     { data: 'rut' },
-                    { data: 'email' },
+                    { data: 'email', defaultContent: '' },
                     { data: 'paisOrigen[0].nameES' },
                     {
                         data: 'fechaNacimiento',

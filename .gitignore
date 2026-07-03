@@ -1,1 +1,10 @@
+# env
+.env
 servidor/.env
+
+# dependencies
+servidor/node_modules/
+
+# IDE / OS
+.vscode/
+.DS_Store

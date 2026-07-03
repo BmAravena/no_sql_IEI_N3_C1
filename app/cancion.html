@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canciones</title>
+    <link href="./css/brite.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/estilos.css">
+    <link href="https://cdn.datatables.net/v/dt/dt-2.3.8/datatables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-2.3.8/datatables.min.js"></script>
+    <script src="./js/canciones_view.js" defer></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">App NoSql</a>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./form.html">Formulario Registro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./cancion.html">Formulario Canción</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <h3>Canciones</h3>
+
+        <div class="card p-3 mb-3">
+            <h5>Agregar Canción</h5>
+            <form id="formCancion">
+                <div class="row">
+                    <div class="col-4">
+                        <label>Usuario</label>
+                        <select id="selectUsuario" class="form-select"></select>
+                    </div>
+                    <div class="col-4">
+                        <label>Título</label>
+                        <input id="inputTitulo" class="form-control" />
+                    </div>
+                    <div class="col-4">
+                        <label>Artista</label>
+                        <input id="inputArtista" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3">
+                        <label>Álbum</label>
+                        <input id="inputAlbum" class="form-control" />
+                    </div>
+                    <div class="col-2">
+                        <label>Género</label>
+                        <input id="inputGenero" class="form-control" />
+                    </div>
+                    <div class="col-2">
+                        <label>Plataforma</label>
+                        <input id="inputPlataforma" class="form-control" />
+                    </div>
+                    <div class="col-2">
+                        <label>Duración (s)</label>
+                        <input id="inputDuracion" type="number" class="form-control" />
+                    </div>
+                    <div class="col-2">
+                        <label>Año</label>
+                        <input id="inputAnio" type="number" class="form-control" />
+                    </div>
+                    <div class="col-3">
+                        <label>Favorita</label>
+                        <select id="inputFavorita" class="form-select"><option value="false">No</option><option value="true">Sí</option></select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <table id="tablaCanciones" class="display">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Artista</th>
+                    <th>Álbum</th>
+                    <th>Género</th>
+                    <th>Duración</th>
+                    <th>Año</th>
+                    <th>Plataforma</th>
+                    <th>Favorita</th>
+                    <th>Usuario</th>
+                    <th>Rut</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>

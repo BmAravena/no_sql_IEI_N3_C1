@@ -1,5 +1,6 @@
 const path = require('path'); // Librería para manejar rutas de archivos y directorios
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') }); // Cargar variables de entorno desde el archivo .env
+// Ej de rutas: http://localhost:3000/cancion.html o index.html o form.html...
 const express = require('express'); // Librería que permite generar servidores JS
 const cors = require('cors'); // Permite la ejecución de scripts entre máquinas distintas (cliente - servidor)
 const mongoose = require('mongoose'); // ORM para trabajar con express (Object Relatonal Mapping)
